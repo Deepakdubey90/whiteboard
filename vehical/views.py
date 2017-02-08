@@ -1,3 +1,4 @@
+# encoding=utf-8
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser
 from models import VehicalParking
@@ -7,6 +8,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import render
+
+
+def switch_to_desire_language(request):
+    """
+    Sholud change the language in session.
+    """
+    print(request)
+    request.session['lang'] = 'en'
 
 
 def CreateVehicalView(request, template_name='create_vehical.html'):
@@ -34,3 +43,4 @@ class VehicalDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = VehicalParking.objects.all()
     serializer_class = VehicalParkingSerializer
+

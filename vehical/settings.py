@@ -1,3 +1,4 @@
+# encoding=utf-8
 """
 Django settings for demo project.
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,7 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.static'
+                'django.core.context_processors.static',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -125,7 +128,21 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+#Enable i18N
 USE_I18N = True
+
+#Add LOCALE_PATHS, this is where your translation files will be stored:
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'conf/locale'),
+)
+
+LANGUAGES = (
+    ('en', ('English')),
+    ('pt-br', ('Portuguese')),
+    ('it', ('Italian')),
+    ('fr', ('French')),
+    ('es', ('Spanish')),
+)
 
 USE_L10N = True
 
