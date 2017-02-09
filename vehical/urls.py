@@ -1,4 +1,4 @@
-# encoding=utf-8
+ # -*- encoding: utf-8 -*-
 """demo URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from rest_framework import routers, serializers, viewsets
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from views import VehicalList, VehicalDetail, CreateVehicalView
+from .views import VehicalList, VehicalDetail, CreateVehicalView, setlanguage
 admin.autodiscover()
 
 
@@ -31,19 +31,20 @@ router.register(r'vehicals/(?P<pk>[0-9]+)', VehicalDetail.as_view(), base_name="
 api_patterns = router.urls
 
 urlpatterns = i18n_patterns(
-        url(r'^admin/', admin.site.urls),
-        url(r'^$', TemplateView.as_view(template_name="vehical_list.html")),
-        url(r'^create/vehical/$', CreateVehicalView),
-        url(r'^update/vehical/(?P<pk>[0-9]+)/$', TemplateView.as_view(template_name="update_vehical.html")),
-        url(r'^vehicals/$', VehicalList.as_view()),
-        url(r'^vehicals/(?P<pk>[0-9]+)/$', VehicalDetail.as_view()),
-        url(r'^i18n/', include('django.conf.urls.i18n')),    
-    )
-    
-    
+    url(r'^$', TemplateView.as_view(template_name="vehical_list.html")),
+    url(r'^admin/', admin.site.urls),
+    url(r'^create/vehical/$', CreateVehicalView),
+    url(r'^update/vehical/(?P<pk>[0-9]+)/$', TemplateView.as_view(template_name="update_vehical.html")),
+    url(r'^vehicals/$', VehicalList.as_view()),
+    url(r'^vehicals/(?P<pk>[0-9]+)/$', VehicalDetail.as_view()),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+    #url(r'^set-language/', set_language, name='set-language'),
+)
+
+
 urlpatterns += [
     url(r'api/', include(router.urls, namespace='api')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 

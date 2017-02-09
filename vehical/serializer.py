@@ -1,5 +1,6 @@
+ # -*- encoding: utf-8 -*-
 from rest_framework import serializers
-from models import VehicalParking
+from .models import VehicalParking
 
 
 class VehicalParkingSerializer(serializers.ModelSerializer):

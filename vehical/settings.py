@@ -1,4 +1,4 @@
-# encoding=utf-8
+ # -*- encoding: utf-8 -*-
 """
 Django settings for demo project.
 
@@ -40,13 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'vehical',
+    'django_makemessages_xgettext',
 ]
 
 MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -64,8 +65,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.core.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.static',
@@ -132,10 +132,20 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 #Add LOCALE_PATHS, this is where your translation files will be stored:
-LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'conf/locale'),
-)
+LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), '../locale/'),)
 
+from django.utils.translation import ugettext_lazy as _
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('pt-br', _('Portuguese')),
+    ('it', _('Italian')),
+    ('fr', _('French')),
+    ('es', _('Spanish')),
+    ('de', _('German')),
+]
+
+'''
 LANGUAGES = (
     ('en', ('English')),
     ('pt-br', ('Portuguese')),
@@ -144,6 +154,7 @@ LANGUAGES = (
     ('es', ('Spanish')),
 )
 
+'''
 USE_L10N = True
 
 USE_TZ = True
