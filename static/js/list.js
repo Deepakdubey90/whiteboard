@@ -22,4 +22,9 @@ $(document).ready(function() {
     $(document).on("click",".btnAdd",function() {
 	window.location = 'http://localhost:8000/create/vehical/'
     })
+
+    $( "#target" ).submit(function( event ) {
+	alert( "Handler for .submit() called." );
+	console.log("Callled!!!!!!!!!!!!!")
+    });
 });

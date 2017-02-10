@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     // To open model to confirm delete or cancel.
     $(document).on("click",".btnDelete",function() {
 	var id = $(this).data('id');

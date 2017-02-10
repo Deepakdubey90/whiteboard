@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+import django.conf.locale
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -131,8 +131,28 @@ TIME_ZONE = 'UTC'
 #Enable i18N
 USE_I18N = True
 
+EXTRA_LANG_INFO = {
+    'gu': {
+        'bidi': False,
+        'code': 'gu',
+        'name': 'Gujarati',
+        'name_local': u'ગુજરાતી',
+    },
+    'hi': {
+        'bidi': False,
+        'code': 'hi',
+        'name': 'Hindi',
+        'name_local': u'हिन्दी',
+    },
+}
+
+#LANG_INFO = dict(django.conf.locale.LANG_INFO.items() + EXTRA_LANG_INFO.items())
+
+django.conf.locale.LANG_INFO.update(EXTRA_LANG_INFO)
+
+
 #Add LOCALE_PATHS, this is where your translation files will be stored:
-LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), '../locale/'),)
+LOCALE_PATHS = (os.path.join(os.path.dirname(__file__), '/conf/locale/'),)
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -143,6 +163,18 @@ LANGUAGES = [
     ('fr', _('French')),
     ('es', _('Spanish')),
     ('de', _('German')),
+    ('ar', _('Arabic')),
+    ('bg', _('Bulgarian')),
+    ('bn', _('Bengali')),
+    ('hi', _('Hindi')),
+    ('gu', _('Gujarati')),
+    ('mr', _('Marathi')),
+    ('te', _('Telugu')),
+    ('ta', _('Tamil')),
+    ('ka', _('Kannada')),
+    ('ur', _('Urdu')),
+
+
 ]
 
 '''

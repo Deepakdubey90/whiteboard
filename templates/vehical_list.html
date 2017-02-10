@@ -29,18 +29,17 @@
 	  <h1 class="well">Vehicals Parking Info</h1>
 	</div>
 	<div class="col-sm-6 form-group">
-	  <form action="/i18n/setlang/" method="post" class="form-inline">
-	    {% csrf_token %}
-	    <div class="col-sm-12 form-group" style="margin-top: 5%;">
-	      <input name="next" type="hidden" value="/" />
-	      <select name="language" class="well" onchange="this.form.submit()">
-		{% for lang in LANGUAGES %}
-		<!--option value="{{ lang.0 }}" {% if lang.0 == SELECTEDLANG %}selected{% endif %}>{% if lang.1 == 'Spanish' %}Español{% else %}{{ lang.1 }}{% endif %}</option-->
-		<option value="{{ lang.0 }}">{{ lang.1 }}</option>
-		{% endfor %}
-	      </select>
-	    </div>
-	  </form>
+  	  <form action="/i18n/setlang/" method="post" class="form-inline" id="target">
+  	    {% csrf_token %}
+  	    <div class="col-sm-12 form-group" style="margin-top: 5%;">
+  	      <input name="next" type="hidden" value="/" />
+  	      <select name="language" class="well" onchange="this.form.submit()">
+  		      {% for lang in LANGUAGES %}
+  		    <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+  	   	{% endfor %}
+  	      </select>
+  	    </div>
+  	  </form>
 	</div>
       </div>
       <table class="table table-hover" id="tbDetails">
