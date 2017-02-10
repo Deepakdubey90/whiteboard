@@ -37,7 +37,6 @@ urlpatterns = i18n_patterns(
     url(r'^update/vehical/(?P<pk>[0-9]+)/$', TemplateView.as_view(template_name="update_vehical.html")),
     url(r'^vehicals/$', VehicalList.as_view()),
     url(r'^vehicals/(?P<pk>[0-9]+)/$', VehicalDetail.as_view()),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
     #url(r'^set-language/', set_language, name='set-language'),
 )
 
@@ -45,6 +44,7 @@ urlpatterns = i18n_patterns(
 urlpatterns += [
     url(r'api/', include(router.urls, namespace='api')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 ]
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 16:42+0530\n"
+"POT-Creation-Date: 2017-02-10 20:00+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,8 +16,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-#"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: templates/vehical_list.html:29
+msgid "Vehicals Parking Info"
+msgstr ""
+
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 #: vehical/settings.py:160
 msgid "English"
 msgstr ""
@@ -40,6 +44,46 @@ msgstr ""
 
 #: vehical/settings.py:165
 msgid "German"
+msgstr ""
+
+#: vehical/settings.py:166
+msgid "Arabic"
+msgstr ""
+
+#: vehical/settings.py:167
+msgid "Bulgarian"
+msgstr ""
+
+#: vehical/settings.py:168
+msgid "Bengali"
+msgstr ""
+
+#: vehical/settings.py:169
+msgid "Hindi"
+msgstr ""
+
+#: vehical/settings.py:170
+msgid "Gujarati"
+msgstr ""
+
+#: vehical/settings.py:171
+msgid "Marathi"
+msgstr ""
+
+#: vehical/settings.py:172
+msgid "Telugu"
+msgstr ""
+
+#: vehical/settings.py:173
+msgid "Tamil"
+msgstr ""
+
+#: vehical/settings.py:174
+msgid "Kannada"
+msgstr ""
+
+#: vehical/settings.py:175
+msgid "Urdu"
 msgstr ""
 
 #: venv/lib/python3.5/site-packages/django/contrib/messages/apps.py:7
