@@ -1,80 +1,17 @@
-@import "font-awesome.min.css";
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+  .aww-input-field,:after,:before{box-sizing:border-box}a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAARCAMAAAA11AaTAAAAD1BMVEUAAADp6enp6enp6en///8uyUgXAAAAA3RSTlMAVamSsHaDAAAAFklEQVQY02NgZmZAAUxMqHxGRoaRBAANPgANgJAOfgAAAABJRU5ErkJggg==);color:#3e3e3e}li,ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}a img{border:none}:focus{outline:0}::selection{color:#fff;background:#3dc476}::-moz-selection{color:#fff;background:#3dc476}body,html{height:100%;margin:0}html{font-size:16px;overflow:hidden}.aww-label-small,.aww-link{-webkit-transition:all 100ms ease-in-out;transition:all 100ms ease-in-out}.aww-strong{font-weight:900!important}.aww-link{color:#3dc476;text-decoration:none}.aww-link:hover{color:#3bb26b}.aww-label-small{font-size:13px;font-weight:400;color:#999;display:inline-block}.aww-input-field{border-radius:6px;-webkit-transition:all .2s ease-out 0s;transition:all .2s ease-out 0s;background:#fff;border:2px solid #e2e2e2;font-size:14px;font-weight:400;display:block;padding:8px;line-height:22px;width:100%;margin-bottom:8px}.aww-input-field:focus{outline:0;border-color:#3dc476;background-color:#fefefe}.aww-button{border-radius:3px;-webkit-transition:all 100ms ease-in-out;transition:all 100ms ease-in-out;font-size:15px;font-weight:400;text-decoration:none;letter-spacing:.25px;color:#fff;text-shadow:0 1px 2px #35A161;display:inline-block;padding:8px 16px;border:0;cursor:pointer;background-color:#3dc476;box-shadow:0 2px 0 0 #3bb26b}.aww-button:hover{background-color:#3bb26b}.aww-modal-inner{padding:0 24px}.aww-modal-header{padding:18px 0 32px;font-size:14px;color:#aaa;position:relative;font-weight:900}.aww-modal-footer{background-color:#eee;border-top:1px solid #e2e2e2;padding:24px}.aww-landing-screen{-o-webkit-border-radius:6px;border-radius:6px;font-family:Lato,Arial,sans-serif;border:1px solid #e2e2e2;background-color:#f9f9f9;position:relative;z-index:200;float:none;overflow:auto;max-width:800px;padding:46px;margin:5% auto}.aww-landing-screen .aww-logo{display:block;float:right;position:absolute;right:48px;bottom:32px;width:100px}.aww-landing-screen .aww-modal-header{font-size:48px;text-transform:inherit;color:#3e3e3e;padding:12px 0 24px;font-weight:900;margin-bottom:24px}.aww-landing-screen .aww-big-copy{font-size:24px;line-height:34px;font-weight:300;color:#3e3e3e}.aww-landing-screen .aww-cta-block{font-size:16px;line-height:18px;margin-top:24px;padding-right:120px}.aww-landing-screen .aww-cta-block .aww-link{display:block}.aww-landing-screen .aww-button{padding:12px 16px;margin-top:10px;font-size:16px;width:150px;text-align:center;font-weight:900}.aww-landing-screen .aww-label-small{display:block;line-height:14px;font-size:11px;margin-top:17px}.aww-landing-screen.premium-promo .content .image img,.aww-landing-screen.premium-promo .content .main-cta .link{display:inline-block}.aww-landing-screen.premium-promo{max-width:480px;padding:0;background-color:#F9F9F9}.aww-landing-screen.premium-promo .header{overflow:auto;padding:12px 24px;border-bottom:1px solid #E3E3E3}.aww-landing-screen.premium-promo .header .logo{float:left}.aww-landing-screen.premium-promo .header .aww-button{float:right;font-size:13px;color:#FFF;padding:6px 10px 4px;width:auto;margin:0}.aww-landing-screen.premium-promo .content{text-align:center;max-width:390px;margin:0 auto;padding:0 24px 24px}.aww-landing-screen.premium-promo .content .image{padding:50px 0 30px}.aww-landing-screen.premium-promo .content .headline{font-weight:900;font-size:15px;color:#454545;line-height:23px;margin-bottom:8px}.aww-landing-screen.premium-promo .content .copy{font-size:13px;font-weight:400;color:#454545;line-height:22px;margin-bottom:20px}.aww-landing-screen.premium-promo .content .main-cta{-o-webkit-border-radius:100px;border-radius:100px;display:inline-block;background:#4575EA;font-weight:900;font-size:13px;color:#FFF;padding:14px 24px;margin:0 auto 30px;text-decoration:none;cursor:pointer}.aww-landing-screen.premium-promo .content .main-cta .link:after{display:block;content:'';width:100%;height:1px;background-color:#fff;margin-top:1px}.aww-landing-screen.premium-promo .content .main-cta:hover{background-color:#3D69D3}.aww-landing-screen.premium-promo .content .learn-more-cta{display:inline-block;font-weight:400;font-size:13px;color:#9F9F9F;margin:0 auto;text-decoration:none;cursor:pointer}.aww-landing-screen.premium-promo .content .learn-more-cta:after{display:block;content:'';width:100%;height:1px;background-color:#ddd;margin-top:1px}.aww-landing-screen.premium-promo .content .learn-more-cta:hover{color:#454545}@media screen and (max-width:800px){.aww-landing-screen{padding:32px}.aww-landing-screen .aww-logo{right:34px;bottom:22px}.aww-landing-screen .aww-modal-header{font-size:32px;padding:8px 0 32px;margin-bottom:0}.aww-landing-screen .aww-big-copy{font-size:22px;line-height:32px}}@media screen and (min-width:800px)and (orientation:portrait){.aww-landing-screen{margin:64px auto}}@media screen and (max-width:800px)and (orientation:portrait){.aww-landing-screen{margin:64px 8px 8px}}@media screen and (max-width:800px)and (orientation:landscape){.aww-landing-screen{margin:8px 8px 8px 64px}.aww-label-small{padding-right:120px}}@media screen and (max-width:580px)and (orientation:landscape){.aww-landing-screen .aww-modal-header{font-size:24px;padding:0 0 24px}.aww-landing-screen .aww-big-copy{font-size:16px;line-height:22px}.aww-landing-screen .aww-cta-block{padding:0 120px 0 0;font-size:14px;margin:0}.aww-landing-screen .aww-button{padding:12px 16px;margin:24px 0}}@media screen and (max-width:480px){.aww-landing-screen{margin:0;text-align:center;position:absolute;top:4px;bottom:4px;left:4px;right:4px;z-index:999;padding:16px}.aww-landing-screen .aww-logo{float:none;position:relative;top:0;right:0;margin:14px auto 20px}.aww-landing-screen .aww-modal-header{display:none}.aww-landing-screen .aww-big-copy{font-size:16px;line-height:22px}.aww-landing-screen .aww-cta-block{padding:24px 12px;font-size:14px}.aww-landing-screen .aww-button{padding:12px 16px;margin:24px auto}}@media screen and (max-height:560px)and (orientation:portrait){.aww-landing-screen .aww-cta-block{margin-top:0;padding:0 12px}}
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  padding-bottom: 19px;
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  padding: 14px 24px;
-  font-size: 21px;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
+  .global-learnmore {
+            height: 40px!important;
+            width: 40px!important;
+            text-align: center;
+            width:26px!important;
+            margin:auto;
+            }
+            .global-learnmore svg {
+            width:100%!important;
+            }
+            @media screen and (max-width: 990px) {
+            .global-learnmore {
+            font-size: 10px;
+            }
+            }

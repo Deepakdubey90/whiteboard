@@ -1,341 +1,321 @@
-<html lang="en" ng-app="Anonymizer">
-  {% load staticfiles %}
-  <head>
-    <link rel="stylesheet" href="{{ STATIC_URL }}/css/index_css.css "/>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <meta name="viewport" content="initial-scale=1" />
-  </head>
-  <body>
+    <!DOCTYPE html>
+    <html>
+    {% load static from staticfiles %}
+      <head>
+        <title>A web whiteboard</title>
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="icon" type="image/png" href="static/favicon.ico">
+        <link rel="apple-touch-icon" href="static/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="static/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114,114" href="static/apple-touch-icon-114x114.png">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+      </head>
+     <!--  -->
+      <body>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>
-	  $(document).ready(function(){
-	  $("ol").append("<li>List item 3</li>")
-	  $("body").append("<ul></ul>")
-	  $("ul").append("<li>One</li>")
-	  $("ul").append("<li>Two</li>")
-	  $("ul").append("<li>Three</li>")
-	  $("ul").append("<li>Four</li>")
-	  $("li").css("color", "blue")
+        <div id="aww-wrapper"></div>
+        <script src="https://awwapp.com/static/widget/js/aww.min.js">
+        </script>
+        <script type="text/javascript">
+          var aww = new AwwBoard('#aww-wrapper', {
+                apiKey: '391e33ce-16fb-41e9-aced-ad424988deba',
+                autoJoin: true,
+                boardLink: '5aj5342-56tz-uhjk-9874',
+                sizes: [3, 5, 8, 13, 20],
+                fontSizes: [10, 12, 16, 22, 30],
+                menuOrder: ['colors', 'sizes', 'tools', 'admin',
+                tools: ['pencil', 'eraser', 'text', 'image'],
+                colors: [ "#000000", "#f44336", "#4caf50", "#2196f3",
+                  "#ffc107", "#9c27b0",     "#e91e63", "#795548"],
+                defaultColor: "#000000",
+                defaultSize: 8,
+                defaultTool: 'pencil',
+         });
+      </script>
 
-	  });
-    </script>
-    <ol>
-	  <li>List item 1</li>
-	  <li>List item 2</li>
-	</ol>
+        <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;" onclick="removeModal()" class="aww">
+          <div id="modal-promo" style="display:none" class="aww-landing-screen premium-promo">
+            <div class="header"><img src="{% static "site/images/premium-promo/aww-inline-logo.png" %}"  alt="A web Whiteboard app" class="logo">
+            <a onclick="removeModal()" class="aww-button">Start drawing</a></div>
+            <div class="content">
+              <div class="image">
+              <img src="index.html" alt="" class="logo featureImage"></div>
+              <hi class="headline featureTitle"></hi>
+              <p class="copy featureDesc"></p>
+            </div>
+          </div>
+          <div id="modal" class="aww-landing-screen">
+<!--             <a href="http://blog.awwapp.com" target="_blank"><img src="static/site/images/logo-inline-positive.png" alt="A Web Whiteboard app" style="width: 280px;" class="aww-logo"></a> -->
+            <div class="aww-modal-header">Touch. Draw. Share.</div>
+            <div class="aww-big-copy">A Web Whiteboard is touch-friendly online whiteboard app that lets you use your <span class="aww-strong">computer, tablet or smartphone</span> to easily <span class="aww-strong">draw sketches, collaborate with others and share</span> them with the world.</div>
+            <a onclick="removeModal()" class="aww-button">
+              Start drawing
+              <div style="display:none" class="modal-loading-indicator"></div>
+            </a>
+            <span class="aww-label"><span style="padding: 0 8px;"></span><a href="#" class="aww-link">Integrated with Django application!!!</a></span>
+            </div>
+          <script type="text/template" id="loadingIndicator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"/><path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z"></path></svg></script>
+        </div>
+        <script>var promoFeature = document.getElementById('modal-promo');
+          var modal = document.getElementById('modal');
+          var isLoading = false;
+          var spinnerIcon = document.getElementById('loadingIndicator').innerHTML;
+          var spinner = document.querySelector('.modal-loading-indicator');
+          
+          function showPromoModal(){
+          	console.log("Callled!!!")
+            var jsonFeature = JSON.parse(document.getElementById('json-promo').innerHTML);
+            var randNum = Math.floor(Math.random()*jsonFeature.length);
+            var featureImage = jsonFeature[randNum].img;
+            var featureTitle = jsonFeature[randNum].title;
+            var featureDesc = jsonFeature[randNum].desc;
+            var trialDays = window.localStorage.trialDaysLeft > 0 ? 'Your trial period expires in '+window.localStorage.trialDaysLeft+ ' days.' : 'Your trial period has expired.';
+          
+            document.querySelector('.featureImage').src = featureImage;
+            document.querySelector('.featureImage').alt = featureTitle;
+            document.querySelector('.featureTitle').innerHTML = featureTitle;
+            document.querySelector('.featureDesc').innerHTML = featureDesc;
+            document.querySelector('.trialDays').innerHTML = trialDays;
+          
+            modal.style.display = 'none';
+            promoFeature.style.display = 'block';
+          }
+          
+          function removeModal(){
+            var nick = document.getElementById("userNickInput");
+            if ("false" && nick !== null && nick.value) {
+              aww._dispatcher.emit('change-user', {nick: nick.value});
+            }
+            document.body.firstChild.onclick=null;
+            modal.style.display = 'none';
+            promoFeature.style.display = 'none';
+          
+            if (typeof aww === 'object') {
+              aww._dispatcher.emit('trial-days');
+              if(aww._dispatcher.callbacks.hasOwnProperty('ga-send')){
+                ga('send', 'event', {
+                  eventCategory: 'Start draw',
+                  eventAction: 'click',
+                  eventLabel: 'Start draw'});}
+            }
+          }
+          
+          if(window.localStorage.isAuthenticated == "true") showPromoModal();
+        </script><script>if ('serviceWorker' in navigator &&
+          (window.location.protocol === 'https:' ||
+           window.location.hostname === 'localhost')) {
+          navigator.serviceWorker.register('service-worker.js', {
+              scope: '/'
+          }).then(function(registration) {
+              if (typeof registration.update == 'function') {
+                  registration.update();
+              }
+          }).catch(function(e) {
+              console.error('Error during service worker registration:', e);
+          });
+          }
+        </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script>
-	  $(document).ready(function(){
-	  $("button").click(function(){
-	  $("#w3s").attr("href", function(i, origValue1, value2){
-	  console.log(origValue1, value2)
-	  return origValue1+ "/jquery";
-	  });
-	  });
-	  });
-	</script>
-    <p><a href="http://www.w3schools.com" id="w3s">W3Schools.com</a></p>
-
-	<button>Change href Value</button>
-
-	<p>Mouse over the link (or click on it) to see that the value of the href attribute has changed.</p>
-
-    <p>The local variable carName cannot be accessed from code outside the function:</p>
-
-    <p id="demo"></p>
-
-    <script>
-      myFunction();
-      document.getElementById("demo").innerHTML =
-      "The type of carName is " + typeof carName;
-
-      function myFunction() {
-      var carName = "Volvo";
-      }
-    </script>
-
-    <button onclick="this.innerHTML = Date(); alert(this);">Click Me to View Time?</button>
-    <!-- Start Navigation -->
-
-    <p id="p1">Please locate where 'locate' occurs!.</p>
-
-    <button onclick="myFunction()">Try it</button>
-
-    <p id="demo"></p>
-    <p id="demo1"></p>
-    <p id="demo2"></p>
-    <p id="demo3"></p>
-
-    <script>
-      function myFunction() {
-      var str = document.getElementById("p1").innerHTML;
-      var pos = str.indexOf("locate");
-      document.getElementById("demo").innerHTML = pos;
-      var pos1 = str.indexOf("where");
-      document.getElementById("demo1").innerHTML = pos1
-
-      var pos2 = str.indexOf("occurs!");
-      document.getElementById("demo2").innerHTML = pos2
-      var pos3 = str.indexOf("Please");
-      document.getElementById("demo3").innerHTML = pos3
-
-      }
-    </script>
-
-
-
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-	<div class="navbar-header">
-
-
-	  <div>
-	    <!DOCTYPE html>
-	    <html>
-	      <body>
-
-		<p id="demo"></p>
-
-		<script>
-		  var text = "";
-		  var i;
-
-		  for(i=1;i<=10;i++){
-			      if(i%2!=0){
-			      text = text+"</br>"+i
-			      }
-			      }
-
-			      // add for loop here
-
-			      document.getElementById("demo").innerHTML = text;
-			      </script>
-
-	      </body>
-	    </html>
-
-	  </div>
-
-
-
-	  <p>Click the buttons to sort car objects on type.</p>
-	  <button onclick="myFunction()">Sort</button>
-	  <p id="demop"></p>
-	  <script>
-	    var cars = [
-	    {type:"Volvo", year:2016},
-	    {type:"Saab", year:2001},
-	    {type:"BMW", year:2010}]
-
-	    displayCars(); //calling display fun
-
-	    function myFunction() {
-	    cars.sort(function(a, b){
-	    var x = a.type.toLowerCase();
-	    var y = b.type.toLowerCase();
-	    if (x < y) {return -1;}
-		    if (x > y) {return 1;}
-	      return 0;
-	      });
-	      displayCars();
-	      }
-
-
-	      function displayCars() {
-	      document.getElementById("demop").innerHTML =
-	      cars[0].type + " " + cars[0].year + "<br>" +
-	      cars[1].type + " " + cars[1].year + "<br>" +
-	      cars[2].type + " " + cars[2].year;
-	      }
-	  </script>
-	  <button onclick="myFunction1()">Sort Alphabetically</button>
-	  <button onclick="myFunction2()">Sort Numerically</button>
-
-
-	  <p id="demo"></p>
-
-	  <script>
-	    var points = [40, 100, 1, 5, 25, 10];
-	    document.getElementById("demo").innerHTML = points;
-
-	    function myFunction1() {
-	    points.sort();
-	    document.getElementById("demo").innerHTML = points;
-	    }
-	    function myFunction2() {
-	    points.sort(function(a, b){return a - b});
-	    document.getElementById("demo").innerHTML = points;
-	    }
-	  </script>
-
-
-	  <button id="btdemo"></button>
-	  <script>
-	    document.getElementById("btdemo").innerHTML = Date();
-	  </script>
-
-	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	    <span class="sr-only">Toggle navigation</span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	  </button>
-	  <a class="navbar-brand" href="#">mchp <small>beta</small></a>
-	</div>
-	<div class="navbar-collapse collapse">
-	  <ul class="nav navbar-nav navbar-right">
-	    <li><a href="/login">Login</a></li>
-	  </ul>
-	</div><!--/.nav-collapse -->
-      </div>
-    </div>
-    <!-- End Navigation -->
-    <div class="container text-center">
-      <h1>mycollegehomepage</h1>
-
-      <p class="lead">Welcome! This semester will be fun... let's get started shall we?</p>
-      <hr>
-      <div class="row">
-	<div class="col-sm-6 col-sm-offset-3">
-	  <form id="emailForm">
-	    <div class="form-group">
-	      <div class="input-group">
-		<input type="text" class="form-control input-lg" name="email" placeholder="What is your .edu email?"/>
-		<span class="input-group-btn">
-		  <button id="emailSubmit" type="submit" class="btn btn-primary btn-lg ladda-button" data-style="expand-right" type="submit"><span class="ladda-label">Go!</span></button>
-		</span>
-	      </div>
-	    </div>
-	  </form>
-	</div>
-      </div>
-      <br></br>
-      <div class="row text-center">
-	<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-	  <div class="flipper">
-	    <div class="front">
-	      <div id="ballWrapper">
-		<div id="ball">
-		  <img class="center-block img-responsive" src="http://new.mycollegehomepage.com/images/svg/bag.svg" alt="backpack" width="75" style="margin: 25px 0px 0px 37px;">
-		</div>
-		<div id="ballShadow"></div>
-	      </div>
-	    </div>
-	    <div class="back">
-	      <div class="panel panel-warning">
-		<div class="panel-heading">
-		  <h3 class="panel-title">Your Life</h3>
-
-		</div>
-		<div class="panel-body">
-		  <p class="text-center"><i class="fa fa-check fa-3x text-warning"></i>
-		  </p>We've made the college experience better by simplifying it. We've put everything you need, all in one place.</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-	  <div class="flipper">
-	    <div class="front">
-	      <div id="ballWrapper" class="animated-lg">
-		<div id="ball">
-		  <img class="center-block img-responsive" src="http://new.mycollegehomepage.com/images/svg/money.svg" alt="money" width="90" style="margin: 25px 0px 0px 30px;">
-		</div>
-		<div id="ballShadow"></div>
-	      </div>
-	    </div>
-	    <div class="back">
-	      <div class="panel panel-success">
-		<div class="panel-heading">
-		  <h3 class="panel-title">Your Earnings</h3>
-
-		</div>
-		<div class="panel-body">
-		  <p class="text-center"><i class="fa fa-money fa-3x text-success"></i>
-		  </p>Sell your Study Guides and get paid. Cashing out is a breeze, too.</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-	  <div class="flipper">
-	    <div class="front">
-	      <div id="ballWrapper">
-		<div id="ball">
-		  <img class="center-block img-responsive" src="http://new.mycollegehomepage.com/images/svg/book.svg" alt="book" width="73" style="margin: 34px 0px 0px 38px;">
-		</div>
-		<div id="ballShadow"></div>
-	      </div>
-	    </div>
-	    <div class="back">
-	      <div class="panel panel-danger">
-		<div class="panel-heading">
-		  <h3 class="panel-title">Your Classes</h3>
-
-		</div>
-		<div class="panel-body">
-		  <p class="text-center"><i class="fa fa-book fa-3x text-danger"></i>
-		  </p>Know when documents and assignments are added to your classes. See when someone joins, too.</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-	  <div class="flipper">
-	    <div class="front">
-	      <div id="ballWrapper">
-		<div id="ball">
-		  <img class="center-block img-responsive" src="http://new.mycollegehomepage.com/images/svg/storage.svg" alt="documents" width="90" style="margin: 32px 0px 0px 30px;">
-		</div>
-		<div id="ballShadow"></div>
-	      </div>
-	    </div>
-	    <div class="back">
-	      <div class="panel panel-info">
-		<div class="panel-heading">
-		  <h3 class="panel-title">Your Docs</h3>
-
-		</div>
-		<div class="panel-body">
-		  <p class="text-center"><i class="fa fa-file-o fa-3x text-info"></i>
-		  </p>If you upload them, we'll keep them organized.</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="flip-container hidden-sm hidden-xs" ontouchstart="this.classList.toggle('hover');">
-	  <div class="flipper">
-	    <div class="front">
-	      <div id="ballWrapper">
-		<div id="ball">
-		  <img class="center-block img-responsive" src="http://new.mycollegehomepage.com/images/svg/ipad.svg" alt="money" width="80" style="margin: 32px 0px 0px 45px;">
-		</div>
-		<div id="ballShadow"></div>
-	      </div>
-	    </div>
-	    <div class="back">
-	      <div class="panel panel-default">
-		<div class="panel-heading">
-		  <h3 class="panel-title">Your Devices</h3>
-
-		</div>
-		<div class="panel-body">
-		  <p class="text-center"><i class="fa fa-mobile fa-3x text-default"></i>
-		  </p>View mchp from any mobile device. We like it on a tablet.</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-      </div>
-      <div id="footer-terms">
-	<p class="small text-muted pull-right"><small>mycollegehomepage.com © 2014 | <a href="/privacy/" class="">Privacy Policy</a></small>
-	</p>
-      </div>
-    </div>
-    <!-- End Landing Page -->
-    <script src="{{ STATIC_URL }}/js/demo.js"></script>
-    <script src="{{ STATIC_URL }}/js/custom.js"></script>
-  </body>
-</html>
+        <script type="text/template" id="learnmore-sub">
+        <svg width="24px" height="18px" viewBox="0 0 24 18" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#FFFFFF" d="M1.60582613,6.5360061 L4.42421484,6.5360061 L4.42421484,7.85183571 L0,7.85183571 L0,0 L1.60582613,0 L1.60582613,6.5360061 Z M7.66317706,7.9596906 C6.86936335,7.9596906 6.2503436,7.72600735 5.80609923,7.25863384 C5.36185486,6.79126033 5.139736,6.12256672 5.139736,5.25253296 L5.139736,4.78875695 C5.139736,3.86839065 5.34364839,3.15835308 5.75147929,2.65862294 C6.15931019,2.15889281 6.74373766,1.90903148 7.50477924,1.90903148 C8.24761409,1.90903148 8.80655252,2.14361352 9.18161129,2.61278462 C9.55667006,3.08195572 9.74783792,3.77671399 9.75512062,4.69708029 L9.75512062,5.44667175 L6.68001821,5.44667175 C6.70186629,5.87809345 6.79836055,6.19356584 6.96950387,6.39309838 C7.14064719,6.59263091 7.40464091,6.69239569 7.76149294,6.69239569 C8.27856426,6.69239569 8.71005744,6.51803203 9.05598543,6.16929949 L9.66226673,7.09145876 C9.47291667,7.35031179 9.19799907,7.55972793 8.83750569,7.71971348 C8.47701231,7.87969902 8.08557335,7.9596906 7.66317706,7.9596906 Z M6.69094219,4.37890838 L8.23668639,4.37890838 L8.23668639,4.23869703 C8.2294037,3.88996448 8.17114301,3.62572265 8.06190259,3.44596361 C7.95266218,3.26620457 7.76331496,3.1763264 7.49385526,3.1763264 C7.22439556,3.1763264 7.02867608,3.27159726 6.90669094,3.46214185 C6.78470581,3.65268643 6.71279028,3.95827222 6.69094219,4.37890838 Z M13.4365043,7.85183571 C13.3928082,7.76195619 13.3491126,7.61096086 13.3054165,7.39884519 C13.0286741,7.772744 12.6536209,7.9596906 12.1802458,7.9596906 C11.6850226,7.9596906 11.2744668,7.79790989 10.9485662,7.47434361 C10.6226656,7.15077733 10.4597178,6.73194505 10.4597178,6.21783419 C10.4597178,5.60665344 10.6572579,5.13389425 11.0523441,4.79954243 C11.4474303,4.46519061 12.0163823,4.29442209 12.7592171,4.28723172 L13.2289486,4.28723172 L13.2289486,3.81806297 C13.2289486,3.55561477 13.1834324,3.37046573 13.0923987,3.26261031 C13.001365,3.15475488 12.8684579,3.10082798 12.6936732,3.10082798 C12.3076904,3.10082798 12.1147019,3.32372585 12.1147019,3.76952827 L10.5689577,3.76952827 C10.5689577,3.23025114 10.7737804,2.78535419 11.183432,2.43482405 C11.5930835,2.08429392 12.1110574,1.90903148 12.7373691,1.90903148 C13.385529,1.90903148 13.887117,2.0753061 14.2421484,2.40786033 C14.5971797,2.74041456 14.7746928,3.2158701 14.7746928,3.8342412 L14.7746928,6.57914806 C14.7819755,7.08247337 14.8548013,7.47613977 14.9931725,7.76015906 L14.9931725,7.85183571 L13.4365043,7.85183571 Z M12.5243514,6.76250136 C12.6954947,6.76250136 12.8411464,6.72834766 12.9613109,6.66003922 C13.0814753,6.59173078 13.170687,6.51084043 13.2289486,6.41736573 L13.2289486,5.20399826 L12.857533,5.20399826 C12.595356,5.20399826 12.3887126,5.28668618 12.2375967,5.4520645 C12.0864808,5.61744281 12.010924,5.83854312 12.010924,6.11537204 C12.010924,6.54679375 12.1820647,6.76250136 12.5243514,6.76250136 Z M18.8111061,3.48910557 L18.2976787,3.44596361 C17.8752824,3.44596361 17.5894409,3.62931509 17.4401457,3.99602353 L17.4401457,7.85183571 L15.8889395,7.85183571 L15.8889395,2.01688637 L17.3472918,2.01688637 L17.3909877,2.64783746 C17.634958,2.15529768 17.9717776,1.90903148 18.4014565,1.90903148 C18.5762412,1.90903148 18.7182516,1.93239981 18.827492,1.97913716 L18.8111061,3.48910557 Z M21.0177515,2.01688637 L21.0614474,2.59391001 C21.4110168,2.13732204 21.867999,1.90903148 22.4324078,1.90903148 C23.4483437,1.90903148 23.9708692,2.6118788 24,4.01759451 L24,7.85183571 L22.4487938,7.85183571 L22.4487938,4.13084214 C22.4487938,3.8000855 22.398726,3.56011078 22.298589,3.41091077 C22.1984519,3.26171077 22.0227596,3.18711189 21.7715066,3.18711189 C21.4911229,3.18711189 21.2726453,3.3291194 21.1160674,3.61313869 L21.1160674,7.85183571 L19.5648612,7.85183571 L19.5648612,2.01688637 L21.0177515,2.01688637 Z M2.55894401,12.0571958 L2.60263996,12.5964702 C2.94856796,12.1650485 3.40555019,11.9493409 3.97360036,11.9493409 C4.56349863,11.9493409 4.98042664,12.2117852 5.2243969,12.7366816 C5.5630422,12.2117852 6.04551348,11.9493409 6.67182522,11.9493409 C7.70596785,11.9493409 8.23577593,12.6557833 8.26126536,14.0686894 L8.26126536,17.8921451 L6.71552117,17.8921451 L6.71552117,14.1657588 C6.71552117,13.8278118 6.66818436,13.5869383 6.57350933,13.4431311 C6.4788343,13.2993238 6.31861742,13.2274213 6.09285389,13.2274213 C5.80518746,13.2274213 5.59035119,13.4017849 5.44833864,13.7505175 L5.45926263,13.9338708 L5.45926263,17.8921451 L3.91351843,17.8921451 L3.91351843,14.1765443 C3.91351843,13.8421925 3.86800228,13.6004202 3.77696859,13.4512202 C3.68593491,13.3020202 3.52389739,13.2274213 3.29085116,13.2274213 C3.02503281,13.2274213 2.81383783,13.3694288 2.6572599,13.6534481 L2.6572599,17.8921451 L1.1115157,17.8921451 L1.1115157,12.0571958 L2.55894401,12.0571958 Z M9.22257624,14.7859244 C9.22257624,13.9015099 9.43377122,13.2076504 9.8561675,12.7043251 C10.2785638,12.2009998 10.8629913,11.9493409 11.6094675,11.9493409 C12.3632263,11.9493409 12.9512951,12.2009998 13.3736914,12.7043251 C13.7960877,13.2076504 14.0072827,13.905105 14.0072827,14.7967099 L14.0072827,15.1688092 C14.0072827,16.0568189 13.7979083,16.7506784 13.3791534,17.2504085 C12.9603985,17.7501387 12.3741503,18 11.6203914,18 C10.8629912,18 10.2740121,17.7492399 9.8534365,17.2477122 C9.43286089,16.7461844 9.22257624,16.0496286 9.22257624,15.1580237 L9.22257624,14.7859244 Z M10.7737824,15.1688092 C10.7737824,16.2114117 11.0559826,16.7327051 11.6203914,16.7327051 C12.1411041,16.7327051 12.4214836,16.2976947 12.4615385,15.427661 L12.4670005,14.7859244 C12.4670005,14.2538376 12.392354,13.8592724 12.2430587,13.602217 C12.0937635,13.3451616 11.8825685,13.2166358 11.6094675,13.2166358 C11.3472905,13.2166358 11.1424677,13.3451616 10.9949932,13.602217 C10.8475186,13.8592724 10.7737824,14.2538376 10.7737824,14.7859244 L10.7737824,15.1688092 Z M17.8852981,13.529415 L17.3718707,13.486273 C16.9494744,13.486273 16.663633,13.6696245 16.5143377,14.0363329 L16.5143377,17.8921451 L14.9631315,17.8921451 L14.9631315,12.0571958 L16.4214838,12.0571958 L16.4651798,12.6881469 C16.7091501,12.1956071 17.0459696,11.9493409 17.4756486,11.9493409 C17.6504333,11.9493409 17.7924437,11.9727092 17.9016841,12.0194466 L17.8852981,13.529415 Z M20.9604005,18 C20.1665868,18 19.5475671,17.7663168 19.1033227,17.2989432 C18.6590783,16.8315697 18.4369595,16.1628761 18.4369595,15.2928424 L18.4369595,14.8290663 C18.4369595,13.9087001 18.6408719,13.1986625 19.0487028,12.6989323 C19.4565337,12.1992022 20.0409611,11.9493409 20.8020027,11.9493409 C21.5448376,11.9493409 22.103776,12.1839229 22.4788348,12.653094 C22.8538935,13.1222651 23.0450614,13.8170234 23.0523441,14.7373897 L23.0523441,15.4869812 L19.9772417,15.4869812 C19.9990898,15.9184029 20.095584,16.2338752 20.2667274,16.4334078 C20.4378707,16.6329403 20.7018644,16.7327051 21.0587164,16.7327051 C21.5757877,16.7327051 22.0072809,16.5583414 22.3532089,16.2096089 L22.9594902,17.1317682 C22.7701402,17.3906212 22.4952226,17.6000373 22.1347292,17.7600229 C21.7742358,17.9200084 21.3827968,18 20.9604005,18 Z M19.9881657,14.4192178 L21.5339099,14.4192178 L21.5339099,14.2790064 C21.5266272,13.9302739 21.4683665,13.6660321 21.3591261,13.486273 C21.2498857,13.306514 21.0605384,13.2166358 20.7910787,13.2166358 C20.521619,13.2166358 20.3258996,13.3119067 20.2039144,13.5024512 C20.0819293,13.6929958 20.0100138,13.9985816 19.9881657,14.4192178 Z"></path>
+          </svg>
+        </script><script type="text/template" id="learnmore-embed"><svg width="38px" height="22px" viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1,3.00138694 L1,18.9986131 C1,20.1046399 1.8943893,21 2.99765987,21 L35.0023401,21 C36.0991015,21 37,20.1001259 37,18.9986131 L37,3.00138694 C37,1.89536005 36.1056107,1 35.0023401,1 L2.99765987,1 C1.90089848,1 1,1.8998741 1,3.00138694 Z M0,3.00138694 C0,1.3437667 1.35244012,0 2.99765987,0 L35.0023401,0 C36.657902,0 38,1.34308127 38,3.00138694 L38,18.9986131 C38,20.6562333 36.6475599,22 35.0023401,22 L2.99765987,22 C1.34209804,22 0,20.6569187 0,18.9986131 L0,3.00138694 Z" fill="#707070"></path>
+          <path d="M15.2473118,13.3626374 L13.0913978,13.3626374 L12.672043,15 L11,15 L13.4462366,7 L14.8924731,7 L17.3548387,15 L15.6666667,15 L15.2473118,13.3626374 Z M13.4354839,12.0164835 L14.8978495,12.0164835 L14.1666667,9.16483516 L13.4354839,12.0164835 Z M19.6666667,12.1868132 L19.6666667,15 L18.0860215,15 L18.0860215,7 L20.7526882,7 C21.5268856,7 22.1442629,7.24541879 22.6048387,7.73626374 C23.0654145,8.22710868 23.2956989,8.86446495 23.2956989,9.64835165 C23.2956989,10.4322384 23.0681026,11.0512798 22.6129032,11.5054945 C22.1577038,11.9597092 21.5268858,12.1868132 20.7204301,12.1868132 L19.6666667,12.1868132 Z M19.6666667,10.8406593 L20.7526882,10.8406593 C21.0537649,10.8406593 21.2867375,10.7399277 21.4516129,10.5384615 C21.6164883,10.3369953 21.6989247,10.043958 21.6989247,9.65934066 C21.6989247,9.26007126 21.6146962,8.94230887 21.4462366,8.70604396 C21.2777769,8.46977904 21.0519727,8.34981687 20.7688172,8.34615385 L19.6666667,8.34615385 L19.6666667,10.8406593 Z M26,15 L24.4193548,15 L24.4193548,7 L26,7 L26,15 Z" fill="#FFFFFF"></path>
+          </svg>
+        </script><script type="text/template" id="learnmore-biz"><svg width="38px" height="22px" viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1,3.00138694 L1,18.9986131 C1,20.1046399 1.8943893,21 2.99765987,21 L35.0023401,21 C36.0991015,21 37,20.1001259 37,18.9986131 L37,3.00138694 C37,1.89536005 36.1056107,1 35.0023401,1 L2.99765987,1 C1.90089848,1 1,1.8998741 1,3.00138694 Z M0,3.00138694 C0,1.3437667 1.35244012,0 2.99765987,0 L35.0023401,0 C36.657902,0 38,1.34308127 38,3.00138694 L38,18.9986131 C38,20.6562333 36.6475599,22 35.0023401,22 L2.99765987,22 C1.34209804,22 0,20.6569187 0,18.9986131 L0,3.00138694 Z" fill="#707070"></path>
+          <path d="M12,15 L12,7 L14.4156442,7 C15.2315992,7 15.8516083,7.18589558 16.2756902,7.55769231 C16.6997721,7.92948904 16.9118098,8.47435538 16.9118098,9.19230769 C16.9118098,9.59890313 16.8241318,9.94871648 16.648773,10.2417582 C16.4734143,10.5348 16.2336416,10.7490836 15.9294479,10.8846154 C16.2801654,10.98718 16.5503569,11.1932219 16.7400307,11.5027473 C16.9297044,11.8122726 17.0245399,12.1941369 17.0245399,12.6483516 C17.0245399,13.4249123 16.8160808,14.010987 16.3991564,14.4065934 C15.9822321,14.8021998 15.3783271,15 14.5874233,15 L12,15 Z M13.5782209,11.521978 L13.5782209,13.6593407 L14.5874233,13.6593407 C14.8701446,13.6593407 15.0848663,13.569598 15.2315951,13.3901099 C15.3783238,13.2106218 15.4516871,12.9560456 15.4516871,12.6263736 C15.4516871,11.9084213 15.1975997,11.5402931 14.6894172,11.521978 L13.5782209,11.521978 Z M13.5782209,10.3461538 L14.3995399,10.3461538 C15.0186636,10.3461538 15.3282209,10.0183183 15.3282209,9.36263736 C15.3282209,8.99999819 15.2566469,8.73992753 15.1134969,8.58241758 C14.9703469,8.42490764 14.7377317,8.34615385 14.4156442,8.34615385 L13.5782209,8.34615385 L13.5782209,10.3461538 Z M19.8159509,15 L18.2377301,15 L18.2377301,7 L19.8159509,7 L19.8159509,15 Z M22.7791411,13.6593407 L26,13.6593407 L26,15 L20.9325153,15 L20.9325153,14.0274725 L24.1211656,8.34615385 L20.9003067,8.34615385 L20.9003067,7 L25.9409509,7 L25.9409509,7.95054945 L22.7791411,13.6593407 Z" fill="#FFFFFF"></path>
+          </svg>
+        </script><script type="text/template" id="learnmore-edu"><svg width="38px" height="22px" viewBox="0 0 38 22" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1,3.00138694 L1,18.9986131 C1,20.1046399 1.8943893,21 2.99765987,21 L35.0023401,21 C36.0991015,21 37,20.1001259 37,18.9986131 L37,3.00138694 C37,1.89536005 36.1056107,1 35.0023401,1 L2.99765987,1 C1.90089848,1 1,1.8998741 1,3.00138694 Z M0,3.00138694 C0,1.3437667 1.35244012,0 2.99765987,0 L35.0023401,0 C36.657902,0 38,1.34308127 38,3.00138694 L38,18.9986131 C38,20.6562333 36.6475599,22 35.0023401,22 L2.99765987,22 C1.34209804,22 0,20.6569187 0,18.9986131 L0,3.00138694 Z" id="Rectangle" fill="#707070"></path>
+          <path d="M15.1119331,11.4769648 L12.6075909,11.4769648 L12.6075909,13.5691057 L15.5712448,13.5691057 L15.5712448,14.8915989 L11,14.8915989 L11,7 L15.5603088,7 L15.5603088,8.32791328 L12.6075909,8.32791328 L12.6075909,10.1924119 L15.1119331,10.1924119 L15.1119331,11.4769648 Z M16.4953361,14.8915989 L16.4953361,7 L18.6005146,7 C19.5300786,7 20.2709847,7.29268 20.8232551,7.87804878 C21.3755254,8.46341756 21.6571244,9.26557756 21.6680605,10.2845528 L21.6680605,11.5636856 C21.6680605,12.6007279 21.3919294,13.4146312 20.8396591,14.0054201 C20.2873887,14.5962089 19.5264335,14.8915989 18.5567707,14.8915989 L16.4953361,14.8915989 Z M18.102927,8.32791328 L18.102927,13.5691057 L18.5841106,13.5691057 C19.1199769,13.5691057 19.4972649,13.429089 19.7159858,13.1490515 C19.9347068,12.869014 20.0495336,12.3857306 20.0604696,11.699187 L20.0604696,10.3279133 C20.0604696,9.59078222 19.9565787,9.07678556 19.7487938,8.78590786 C19.5410089,8.49503016 19.1874154,8.34236683 18.6880026,8.32791328 L18.102927,8.32791328 Z M28,7 L28,12.4634146 C27.9927093,13.2836536 27.7648784,13.9114703 27.3165005,14.3468835 C26.8681226,14.7822967 26.2247281,15 25.3862978,15 C24.5332862,15 23.8816898,14.7795867 23.4314892,14.3387534 C22.9812886,13.8979201 22.7561917,13.2601668 22.7561917,12.4254743 L22.7561917,7 L24.3747186,7 L24.3747186,12.4308943 C24.3747186,12.8789544 24.4476244,13.1987344 24.5934384,13.3902439 C24.7392524,13.5817534 25.0035362,13.6775068 25.3862978,13.6775068 C25.7690595,13.6775068 26.0315207,13.5826568 26.1736893,13.3929539 C26.3158579,13.2032511 26.3887638,12.8916011 26.3924091,12.4579946 L26.3924091,7 L28,7 Z" fill="#FFFFFF"></path>
+          </svg>
+        </script>
+        <script>function makeButton(src) {
+          var btnImg = document.createElement('div');
+          if(src==='learnmore-sub')btnImg.setAttribute('class', 'global-learnmore');
+          btnImg.innerHTML = document.getElementById(src).innerHTML;
+          return btnImg;
+          }
+          
+          function learnMore(data) {
+          eventLabel = data.gasend || 'learnButton';
+          ga('send', 'event', {
+            eventCategory: 'Learn more',
+            eventAction: 'click',
+            eventLabel: eventLabel});
+          window.open('/info/', '_blank');
+          }
+          var aww = new AwwBoard('.aww', {
+          apiKey: 'awwapp-api-key',
+          prettyLinks: '/b/',
+          inviteViaQr: true,
+          multiPage: true,
+          enableClassroom: false,
+          menuItems: {
+            learnmore: {
+              content: makeButton('learnmore-sub'),
+              submenu: [{
+                onclick: function(){
+                  gaSend({gasend: 'learnmore_biz'});
+                  window.open('/info', '_blank');
+                },
+                content: makeButton('learnmore-biz')
+              }, {
+                onclick: function(){
+                  gaSend({gasend: 'learnmore_edu'});
+                  window.open('/edu/', '_blank');
+                },
+                content: makeButton('learnmore-edu')
+              }, {
+                onclick: function(){
+                  gaSend({gasend: 'learnmore_embed'});
+                  window.open('/info?section=embed', '_blank');
+                },
+                content: makeButton('learnmore-embed')
+              }]
+            }
+          },
+          
+          menuOrder: [
+            'colors', 'sizes', 'tools', 'panning', 'saveload',
+            'admin', 'share', 'learnmore'
+          ]
+          });
+          window.addEventListener('keyup', function(e) {
+          if (e.target.tagName.toLowerCase() !== 'body') {
+              return;
+          }
+          if (e.key === 'p') {
+              aww._dispatcher.emit('change-tool', { tool: 'pencil' });
+          } else if (e.key === 'e') {
+              aww._dispatcher.emit('change-tool', { tool: 'eraser' });
+          } else if (e.key === 't') {
+              aww._dispatcher.emit('change-tool', { tool: 'text' });
+          } else if (e.key === 'u') {
+              aww._dispatcher.emit('do-undo');
+          } else if (e.key === '1') {
+              aww._dispatcher.emit('change-size', { size: 3 });
+          } else if (e.key === '2') {
+              aww._dispatcher.emit('change-size', { size: 5 });
+          } else if (e.key === '3') {
+              aww._dispatcher.emit('change-size', { size: 8 });
+          } else if (e.key === '4') {
+              aww._dispatcher.emit('change-size', { size: 13 });
+          } else if (e.key === '5') {
+              aww._dispatcher.emit('change-size', { size: 20 });
+          } else if (e.key === 'i') {
+              aww._dispatcher.emit('widget-invite');
+          } else if (e.key === ' ') {
+              aww._dispatcher.emit('change-tool', { tool: 'pan' });
+          }
+          });
+        </script><script type="text/javascript"> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        </script><script>ga('create', 'UA-638384-12', 'auto');
+          ga('send', 'pageview');
+          
+          function undo_event(){
+            gaSend({gasend: 'undo'});}
+          
+          function goToPage_event(){
+            gaSend({gasend: 'goToPage'});}
+          
+          function changeTool_event(tool){
+            gaSend({gasend: 'changeTool', tool: tool.tool});}
+          
+          function invite_event(){
+            gaSend({gasend: 'inviteEvent'});}
+          
+          function tryPremium(){
+            gaSend({gasend: 'tryPremium'});}
+          
+          function changeColor_event(colorCode){
+            if(colorCode === '#000000'){var color = 'black'}
+            else if(colorCode.color === '#f44336') {var selColor = 'red'}
+            else if(colorCode.color === '#2196f3') {var selColor = 'blue'}
+            else if(colorCode.color === '#4caf50') {var selColor = 'green'}
+            else if(colorCode.color === '#ffc107') {var selColor = 'yellow'}
+            else if(colorCode.color === '#e91e63') {var selColor = 'pink'}
+            else if(colorCode.color === '#9c27b0') {var selColor = 'purple'}
+            else if(colorCode.color === '#795548') {var selColor = 'brown'}
+            gaSend({gasend: 'changeColor', color: selColor});}
+          
+          function gaSend(data){
+            if(data.gasend==='changeColor'){var event_label = data.color}
+            else if(data.gasend==='changeTool'){var event_label = data.tool}
+            else if(data.gasend==='TryPremium'){var event_label = 'TryPremiumRoot'}
+            else if(data.gasend==='login'){var event_label = 'dialogLogin'}
+            else{var event_label = data.gasend;}
+          
+            ga('send', 'event', {
+              eventCategory: data.gasend,
+              eventAction: 'click',
+              eventLabel: event_label })
+          }
+          
+          function loginClick(){
+            removeModal();
+            aww._dispatcher.emit("widget-login");
+            gaSend({gasend: 'login'});
+          }
+          
+          function onPdfExport(){
+            gaSend({gasend: 'exportPdf'});
+          }
+          
+          function userLoggedIn(trialDays){
+            window.localStorage.isAuthenticated = true;
+            window.localStorage.trialDaysLeft = trialDays.trialDaysLeft;
+          }
+          
+          function userLoggedOut(){
+            window.localStorage.removeItem('isAuthenticated');
+            window.localStorage.removeItem('trialDaysLeft');
+          }
+          
+          aww._dispatcher.on('ga-send',gaSend);
+          aww._dispatcher.on('do-undo',undo_event);
+          aww._dispatcher.on('change-tool',changeTool_event);
+          aww._dispatcher.on('change-color',changeColor_event);
+          aww._dispatcher.on('widget-invite', invite_event);
+          aww._dispatcher.on('userLoggedIn', userLoggedIn);
+          aww._dispatcher.on('userLoggedOut', userLoggedOut);
+          
+        </script><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+          n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+          document,'script','https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '163935684055557', {
+          em: 'insert_email_variable,'
+          });
+          fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=163935684055557&amp;ev=PageView&amp;noscript=1"></noscript>
+        <script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+          },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+          a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+          // Insert Twitter Pixel ID and Standard Event data below
+          twq('init','nvoun');
+          twq('track','PageView');
+        </script><script>(function(h,o,t,j,a,r){
+          h.hj=h.hj || function () {
+            (h.hj.q = h.hj.q || []).push(arguments)
+          };
+          h._hjSettings={hjid: 413418, hjsv: 5};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+          a.appendChild(r);
+          })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+        </script>
+      </body>
+    </html>
